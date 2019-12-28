@@ -7,16 +7,16 @@ This module provides a simple way of configuring ESP8266 chips without using a
 serial interface or pre-programming WiFi credentials onto the chip.
 
 After running [`enduser_setup.start()`](#enduser_setupstart), a wireless 
-network named "SetupGadget_XXXXXX" will starting. This prefix can be overridden
+network named "SetupGadget_XXXXXX" will be started. This prefix can be overridden
 in `user_config.h` by defining `ENDUSER_SETUP_AP_SSID`. Connect to that SSID 
 and then navigate to the root of any website or to 192.168.4.1. 
 `http://example.com/` will work, but do not use `.local` domains because it 
 will fail on iOS. A web page similar to the one depicted below will load, 
-allowing the end user to provide their Wi-Fi credentials.
+allowing the end user to provide their WiFi credentials.
 
 ![enduser setup config dialog](../img/enduser-setup-captive-portal.png "enduser setup config dialog")
 
-After an IP address has been successfully obtained, then this module will stop
+After an IP address has been successfully obtained, this module will stop
 as if [`enduser_setup.stop()`](#enduser_setupstop) had been called. There is a
 10-second delay before teardown to allow connected clients to obtain a last 
 status message while the SoftAP is still active.
@@ -24,7 +24,7 @@ status message while the SoftAP is still active.
 Alternative HTML can be served by placing a file called `enduser_setup.html` on
 the filesystem. Everything needed by the web page must be included in this one
 file. This file will be kept in RAM, so keep it as small as possible. The file
-can be gzip'd ahead of time to reduce the size (i.e., using `gzip -n` or
+can be gzipped ahead of time to reduce the size (i.e., using `gzip -n` or
 `zopfli`), and when served, the End User Setup module will add the appropriate
 `Content-Encoding` header to the response.
 
@@ -34,11 +34,11 @@ filename.*
 
 ### Additional configuration parameters
 
-You can also add some additional inputs in the `enduser_setup.html` (as long as
+You can also add additional inputs in the `enduser_setup.html` (as long as
 you keep those needed for the WiFi setup). The additional data will be written
 in a `eus_params.lua` file in the root filesystem of the ESP8266, which you can
 then load in your own code. In this case, the data will be saved as a set of
-variables with the name being the input name, and the value being a string
+variables with the name being the input name and the value being a string
 representing what you put in the form.
 
 For instance, if your HTML contains two additional inputs:
@@ -76,10 +76,10 @@ print("Wifi device_name: " .. p.device_name)
 |----|------|-----------|
 |/|GET|Returns HTML for the web page. Will return the contents of `enduser_setup.html` if it exists on the filesystem, otherwise will return a page embedded into the firmware image.|
 |/aplist|GET|Forces the ESP8266 to perform a site survey across all channels, reporting access points that it can find. Return payload is a JSON array: `[{"ssid":"foobar","rssi":-36,"chan":3}]`|
-|/generate_204|GET|Returns a HTTP 204 status (expected by certain Android clients during Wi-Fi connectivity checks)|
+|/generate_204|GET|Returns a HTTP 204 status (expected by certain Android clients during WiFi connectivity checks)|
 |/status|GET|Returns plaintext status description, used by the web page|
-|/status.json|GET|Returns a JSON payload containing the ESP8266's chip id in hexadecimal format and the status code: 0=Idle, 1=Connecting, 2=Wrong Password, 3=Network not Found, 4=Failed, 5=Success|
-|/setwifi|POST|HTML form post for setting the WiFi credentials. Expects HTTP content type `application/x-www-form-urlencoded`. Supports sending and storing additinal configuration parameters (as input fields). Returns the same payload as `/status.json` instead of redirecting to `/`. See also: `/update`.|
+|/status.json|GET|Returns a JSON payload containing the ESP8266's chip ID in hexadecimal format and the status code: 0=Idle, 1=Connecting, 2=Wrong Password, 3=Network not Found, 4=Failed, 5=Success|
+|/setwifi|POST|HTML form post for setting the WiFi credentials. Expects HTTP content type `application/x-www-form-urlencoded`. Supports sending and storing additional configuration parameters (as input fields). Returns the same payload as `/status.json` instead of redirecting to `/`. See also: `/update`.|
 |/update|GET|Data submission target. Example: `http://example.com/update?wifi_ssid=foobar&wifi_password=CorrectHorseBatteryStaple`. Will redirect to `/` when complete. Note that will NOT update the `eus_params.lua` file i.e. it does NOT support sending arbitrary parameters. See also: `/setwifi`. |
 
 Module functions are described below.
@@ -91,8 +91,8 @@ Module functions are described below.
 Controls whether manual AP configuration is used.
 
 By default the `enduser_setup` module automatically configures an open access
-point when starting, and stops it when the device has been successfully joined
-to a WiFi network. If manual mode has been enabled, neither of this is done.
+point when starting and stops it when the device has been successfully joined
+to a WiFi network. If manual mode has been enabled, neither of these is done.
 The device must be manually configured for `wifi.SOFTAP` mode prior to calling 
 `enduser_setup.start()`. Additionally, the portal is not stopped after the 
 device has successfully joined to a WiFi network.
