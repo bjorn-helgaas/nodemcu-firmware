@@ -7,9 +7,9 @@
 
 ### A Lua based firmware for ESP8266 WiFi SOC
 
-NodeMCU is an open source [Lua](https://www.lua.org/) based firmware for the [ESP8266 WiFi SOC from Espressif](http://espressif.com/en/products/esp8266/) and uses an on-module flash-based [SPIFFS](https://github.com/pellepl/spiffs) file system. NodeMCU is implemented in C and is layered on the [Espressif NON-OS SDK](https://github.com/espressif/ESP8266_NONOS_SDK).
+NodeMCU is an open-source [Lua](https://www.lua.org/)-based firmware for the [ESP8266 WiFi SOC from Espressif](http://espressif.com/en/products/esp8266/) and uses an on-module flash-based [SPIFFS](https://github.com/pellepl/spiffs) file system. NodeMCU is implemented in C and is layered on the [Espressif NON-OS SDK](https://github.com/espressif/ESP8266_NONOS_SDK).
 
-The firmware was initially developed as is a companion project to the popular ESP8266-based [NodeMCU development modules]((https://github.com/nodemcu/nodemcu-devkit-v1.0)), but the project is now community-supported, and the firmware can now be run on _any_ ESP module.
+The firmware was initially developed as a companion project to the popular ESP8266-based [NodeMCU development modules]((https://github.com/nodemcu/nodemcu-devkit-v1.0)), but the project is now community-supported, and the firmware can now be run on _any_ ESP module.
 
 # Summary
 
@@ -21,7 +21,7 @@ The firmware was initially developed as is a companion project to the popular ES
 - Up-to-date documentation at [https://nodemcu.readthedocs.io](https://nodemcu.readthedocs.io)
 
 ### LFS support
-In July 2018 support for a Lua Flash Store (LFS) was introduced. LFS  allows Lua code and its associated constant data to be executed directly out of flash-memory; just as the firmware itself is executed. This now enables NodeMCU developers to create **Lua applications with up to 256Kb** Lua code and read-only constants executing out of flash. All of the RAM is available for read-write data!
+In July 2018 support for a Lua Flash Store (LFS) was introduced. LFS allows Lua code and its associated constant data to be executed directly out of flash-memory; just as the firmware itself is executed. This enables NodeMCU developers to create **Lua applications with up to 256Kb** Lua code and read-only constants executing out of flash. All of the RAM is available for read-write data!
 
 # Programming Model
 
